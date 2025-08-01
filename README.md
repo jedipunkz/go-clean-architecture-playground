@@ -31,6 +31,19 @@
 └── README.md
 ```
 
+## アーキテクチャ構成図
+
+### システム構成
+![システム構成図](docs/system-architecture-1.png)
+
+### 依存関係の方向
+![依存関係図](docs/system-architecture-2.png)
+
+詳細な構成図は `docs/` フォルダにあります：
+- `docs/architecture.mermaid` - 純粋な Mermaid 図
+- `docs/architecture-diagram.html` - ブラウザで開ける詳細解説付き図
+- `architecture.md` - GitHub で描画される Mermaid 図（複数パターン）
+
 ## 各層の説明
 
 ### 1. エンティティ層 (Entity Layer)

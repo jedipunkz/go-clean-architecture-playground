@@ -1,0 +1,46 @@
+graph TB
+    subgraph "外部"
+        Client[HTTPクライアント]
+    end
+    
+    subgraph "Interface Layer（インターフェース層）"
+        Controller[UserController<br/>HTTP Handler]
+        RepoInterface[UserRepository<br/>Interface]
+    end
+    
+    subgraph "Use Case Layer（ユースケース層）"
+        UseCase[UserUsecase<br/>ビジネスロジック]
+    end
+    
+    subgraph "Entity Layer（エンティティ層）"
+        Entity[User Entity<br/>ビジネスルール]
+    end
+    
+    subgraph "Infrastructure Layer（インフラ層）"
+        Repository[MemoryUserRepository<br/>データ永続化]
+    end
+    
+    subgraph "Main（依存性注入）"
+        Main[main.go<br/>DI Container]
+    end
+
+    Client --> Controller
+    Controller --> UseCase
+    UseCase --> RepoInterface
+    UseCase --> Entity
+    Repository -.-> RepoInterface
+    Main --> Controller
+    Main --> UseCase
+    Main --> Repository
+
+    classDef entity fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+    classDef usecase fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef interface fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef infrastructure fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef main fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+
+    class Entity entity
+    class UseCase usecase
+    class Controller,RepoInterface interface
+    class Repository infrastructure
+    class Main main
